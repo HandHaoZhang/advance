@@ -12,8 +12,26 @@
     tools:context="com.hezaijin.advance.ui.activity.RefreshActivity"
     tools:showIn="@layout/activity_refresh">
 
-    <com.hezaijin.advance.widgets.view.ptr.load.LoadingView
-        android:layout_centerInParent="true"
-        android:layout_width="200dp"
-        android:layout_height="200dp"></com.hezaijin.advance.widgets.view.ptr.load.LoadingView>
+    <com.hezaijin.advance.widgets.view.ptr.load.PtrFootView
+        android:id="@+id/refresh"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"></com.hezaijin.advance.widgets.view.ptr.load.PtrFootView>
+    <Button
+        android:layout_marginLeft="50dp"
+        android:layout_width="wrap_content"
+        android:id="@+id/start"
+        android:text="开始"
+        android:textSize="25sp"
+        android:padding="15dp"
+        android:layout_height="wrap_content" />
+    <Button
+        android:layout_marginRight="50dp"
+        android:layout_width="wrap_content"
+        android:id="@+id/stop"
+        android:text="结束"
+        android:layout_alignParentRight="true"
+        android:textSize="25sp"
+        android:padding="15dp"
+        android:layout_height="wrap_content" />
 </RelativeLayout>

@@ -18,9 +18,12 @@ import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
+
+import com.hezaijin.advance.widgets.R;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -77,13 +80,13 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     private float mRotation;
 
     /** Layout info for the arrowhead in dp */
-    private static final int ARROW_WIDTH = 10;
-    private static final int ARROW_HEIGHT = 5;
+    private static final int ARROW_WIDTH = 9;
+    private static final int ARROW_HEIGHT = 4;
     private static final float ARROW_OFFSET_ANGLE = 5;
 
     /** Layout info for the arrowhead for the large spinner in dp */
-    private static final int ARROW_WIDTH_LARGE = 12;
-    private static final int ARROW_HEIGHT_LARGE = 6;
+    private static final int ARROW_WIDTH_LARGE = 9;
+    private static final int ARROW_HEIGHT_LARGE = 4;
     private static final float MAX_PROGRESS_ARC = .8f;
 
     private Resources mResources;
@@ -93,11 +96,11 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
     private double mWidth;
     private double mHeight;
     boolean mFinishing;
-
+    private Context mContext;
     public MaterialProgressDrawable(Context context, View parent) {
         mParent = parent;
         mResources = context.getResources();
-
+        this.mContext = context;
         mRing = new Ring(mCallback);
         mRing.setColors(COLORS);
 
@@ -276,6 +279,28 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         mRing.setColorIndex(0);
         mRing.resetOriginals();
     }
+
+    public void stop(Animation animation){
+        if (null == animation){
+            animation= AnimationUtils.loadAnimation(mContext, R.anim.translate_ptr_foot);
+            mParent.startAnimation(animation);
+        }
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                stop();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+    }
+
 
     private float getMinProgressArc(Ring ring) {
         return (float) Math.toRadians(
@@ -631,7 +656,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
          */
         public void setStrokeWidth(float strokeWidth) {
             mStrokeWidth = strokeWidth;
-            mPaint.setStrokeWidth(strokeWidth);
+            mPaint.setStrokeWidth(strokeWidth-2);
             invalidateSelf();
         }
 
