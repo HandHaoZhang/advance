@@ -1,6 +1,5 @@
 package com.hezaijin.advance.ui.activity;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentManager;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.hezaijin.advance.R;
-import com.hezaijin.advance.base.BaseFragment;
 import com.hezaijin.advance.ui.dialog.CustomDialog;
 import com.hezaijin.advance.ui.fragment.ListDataFragment;
 
@@ -66,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        reset();
         switch (id){
             case R.id.action_retrofit:
                 break;
@@ -80,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void reset(){
-//        mContent.setText("");
-    }
 
 
 }
