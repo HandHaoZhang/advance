@@ -18,6 +18,7 @@ import com.hezaijin.advance.rest.modle.ResponseListEvent;
 import com.hezaijin.advance.ui.adapter.ListDataAdapter;
 import com.hezaijin.advance.utils.CalendarUtils;
 import com.hezaijin.advance.widgets.view.progress.IndicatorView;
+import com.hezaijin.advance.widgets.view.ptr.load.PtrFootView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -62,9 +63,15 @@ public class ListDataFragment extends BaseFragment {
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mIndicator.setCount(mIndicator.getCount()+1);
+                mIndicator.setCount(mIndicator.getCount() + 1);
             }
         });
+        View header = inflater.inflate(R.layout.header_list_data, null, false);
+        mListView.addHeaderView(header);
+        View foot = inflater.inflate(R.layout.foot_list_data, null, false);
+        PtrFootView footView = (PtrFootView) foot.findViewById(R.id.foot);
+        footView.startRefresh();
+        mListView.addFooterView(foot);
         return view;
     }
 
