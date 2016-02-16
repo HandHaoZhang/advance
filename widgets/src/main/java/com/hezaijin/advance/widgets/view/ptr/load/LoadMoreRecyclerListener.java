@@ -1,22 +1,10 @@
 package com.hezaijin.advance.widgets.view.ptr.load;
 
-import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.view.View;
-
-import space.sye.z.library.manager.RecyclerMode;
-import space.sye.z.library.widget.RefreshLoadingLayout;
-import space.sye.z.library.widget.RotateLoadingLayout;
-
 /**
  * Created by Syehunter on 2015/11/21.
  */
-public class LoadMoreRecyclerListener extends RecyclerView.OnScrollListener {
-    private static final String TAG = "LoadMoreRecyclerListener" ;
+public class LoadMoreRecyclerListener /*extends RecyclerView.OnScrollListener*/ {
+   /* private static final String TAG = "LoadMoreRecyclerListener" ;
     private Context mContext;
     private RecyclerMode mode;
 
@@ -31,17 +19,17 @@ public class LoadMoreRecyclerListener extends RecyclerView.OnScrollListener {
     private OnBothRefreshListener mOnBothRefreshListener;
     private RefreshLoadingLayout mFooterLoadingLayout;
 
-    /**
+    *//**
      * 是否是正则加载状态
-     */
+     *//*
     private boolean isLoading = false;
-    /**
+    *//**
      * 通过滚动方向判断是否允许上拉加载
-     */
+     *//*
     public boolean isLoadingMoreEnabled = true;
-    /**
+    *//**
      * 加载更多之前RecyclerView的item数量
-     */
+     *//*
     private int mOldItemCount;
 
     private boolean hasCompleted = false;
@@ -114,7 +102,7 @@ public class LoadMoreRecyclerListener extends RecyclerView.OnScrollListener {
         int totalItemCount = mLayoutManager.getItemCount();
 
         if (visibleItemCount > 0
-                /*&& mScrollState == RecyclerView.SCROLL_STATE_IDLE*/
+                *//*&& mScrollState == RecyclerView.SCROLL_STATE_IDLE*//*
                 && lastVisibleItemPosition >= totalItemCount - 1
                && isLoadingMoreEnabled){
 
@@ -144,9 +132,9 @@ public class LoadMoreRecyclerListener extends RecyclerView.OnScrollListener {
         }
     }
 
-    /**
+    *//**
      * 添加LoadMore布局
-     */
+     *//*
     private void addFooterLoadinLayout(RecyclerView recyclerView) {
         isLoading = true;
         if (null == mFooterLoadingLayout) {
@@ -167,12 +155,12 @@ public class LoadMoreRecyclerListener extends RecyclerView.OnScrollListener {
         this.mOnBothRefreshListener = onBothRefreshListener;
     }
 
-    /**
+    *//**
      * StaggeredGridLayoutManager firstVisibleItemPosition
      *
      * @param mPositions
      * @return
-     */
+     *//*
     private int getFirst(int[] mPositions) {
         int first = mPositions[0];
         for (int value : mPositions) {
@@ -183,12 +171,12 @@ public class LoadMoreRecyclerListener extends RecyclerView.OnScrollListener {
         return first;
     }
 
-    /**
+    *//**
      * StaggeredGridLayoutManager lastVisibleItemPosition
      *
      * @param mPositions
      * @return
-     */
+     *//*
     private int getLast(int[] mPositions) {
         int last = mPositions[0];
         for (int value : mPositions) {
@@ -209,6 +197,6 @@ public class LoadMoreRecyclerListener extends RecyclerView.OnScrollListener {
             hasCompleted = true;
 //            mAdapter.removeFooter(mFooterLoadingLayout);
         }
-    }
+    }*/
 
 }

@@ -17,11 +17,10 @@ import android.widget.AdapterView;
 
 import java.util.ArrayList;
 
-import space.sye.z.library.holder.RecyclerHeaderViewHolder;
-
 /**
  * Created by Syehunter on 2015/11/2.
  */
+@Deprecated
 public class RefreshRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER_VIEW = Integer.MIN_VALUE;
@@ -177,7 +176,7 @@ public class RefreshRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (null != mAdapter) {
+        /*if (null != mAdapter) {
             if (mHeaderViewTypes.contains(viewType)) {
                 //currentPosition in mHeaderViews is (viewType - TYPE_HEADER_VIEW)
                 return new RecyclerHeaderViewHolder(mHeaderViews.get(viewType - TYPE_HEADER_VIEW));
@@ -188,7 +187,7 @@ public class RefreshRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             } else {
                 return mAdapter.onCreateViewHolder(parent, viewType);
             }
-        }
+        }*/
         return null;
     }
 

@@ -1,20 +1,15 @@
 package com.hezaijin.advance.widgets.view.ptr.load;
 
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.View;
-import android.view.ViewGroup;
-
 /**
  * 可以判断滑动到最底部的时候，设置footview为加载中
  *
  * @author HaoZhang
  * @date 2016/2/1.
  */
-public class PtrAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+@Deprecated
+public class PtrAdapter /*extends RecyclerView.Adapter<RecyclerView.ViewHolder> */{
 
-    public static final int MODE_BOTH = 0;
+   /* public static final int MODE_BOTH = 0;
     public static final int MODE_ONLY_PULLDOWN = -1;
     private RecyclerView.Adapter<RecyclerView.ViewHolder> mAdapter;
     private int mMode = MODE_BOTH;
@@ -150,5 +145,5 @@ public class PtrAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         this.mOnItemLongClickListener = onItemLongClickListener;
-    }
+    }*/
 }
