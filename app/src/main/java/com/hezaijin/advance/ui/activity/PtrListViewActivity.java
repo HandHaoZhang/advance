@@ -1,4 +1,4 @@
-package com.hezaijin.advance;
+package com.hezaijin.advance.ui.activity;
 
 import android.os.Bundle;
 import android.os.Looper;
@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.hezaijin.advance.R;
 import com.hezaijin.advance.utils.ViewHolder;
 import com.hezaijin.advance.widgets.view.ptr.load.PtrListView;
 

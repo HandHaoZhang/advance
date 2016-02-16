@@ -73,7 +73,7 @@
 
         </activity>
         <activity
-            android:name=".PtrListViewActivity"
+            android:name=".ui.activity.PtrListViewActivity"
             android:label="@string/title_activity_ptr_list_view"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
