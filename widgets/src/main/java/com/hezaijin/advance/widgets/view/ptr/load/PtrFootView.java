@@ -74,8 +74,8 @@ public class PtrFootView extends LinearLayout{
         mRefreshDrawable.start();
     }
 
-    public void stopRefresh(Animation animation){
-        mRefreshDrawable.stop(animation);
+    public void stopRefresh(Animation animation,MaterialProgressDrawable.AnimationListener listener){
+        mRefreshDrawable.stop(animation,listener);
     }
 
     public void stopRefresh(){

@@ -280,7 +280,12 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
         mRing.resetOriginals();
     }
 
-    public void stop(Animation animation){
+    public interface AnimationListener{
+        public void onCompleted();
+    }
+
+    public void stop(Animation animation,final AnimationListener listener){
+
         if (null == animation){
             animation= AnimationUtils.loadAnimation(mContext, R.anim.translate_ptr_foot);
             mParent.startAnimation(animation);
@@ -293,6 +298,7 @@ public class MaterialProgressDrawable extends Drawable implements Animatable {
             @Override
             public void onAnimationEnd(Animation animation) {
                 stop();
+                listener.onCompleted();
             }
 
             @Override

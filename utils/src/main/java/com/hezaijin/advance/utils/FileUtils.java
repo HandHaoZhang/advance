@@ -1,13 +1,18 @@
 package com.hezaijin.advance.utils;
 
+import android.content.Context;
+import android.os.Environment;
+import android.os.storage.StorageManager;
 import android.util.Log;
 
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.zip.ZipOutputStream;
 
 /**
@@ -144,6 +149,46 @@ public final class FileUtils {
             e.printStackTrace();
             Log.v(TAG, " upload file : " + filepath + " failure");
         }
+    }
+
+
+    /**
+     * 获取所有的挂载路径
+     * @param context
+     * @return
+     */
+    public static ArrayList<String> getStoragePaths(Context context) {
+        ArrayList<String> storagePaths = new ArrayList<String>();
+        String[] paths = null;
+        Method method = null;
+        StorageManager manager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
+        try {
+            method = manager.getClass().getDeclaredMethod("getVolumePaths", null);
+            paths = (String[]) method.invoke(manager, null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            method = manager.getClass().getDeclaredMethod("getVolumeState", String.class);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        int length = paths.length;
+        if (null != paths && null != method) {
+            for (int i = 0; i < length; i++) {
+                String path = paths[i];
+                try {
+                    String value = (String) method.invoke(manager, path);
+                    if (value.equals(Environment.MEDIA_MOUNTED)) {
+                        storagePaths.add(path);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    continue;
+                }
+            }
+        }
+        return storagePaths;
     }
 
 }
