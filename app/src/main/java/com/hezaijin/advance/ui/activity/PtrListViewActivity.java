@@ -7,21 +7,27 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.hezaijin.advance.R;
 import com.hezaijin.advance.utils.ViewHolder;
-import com.hezaijin.advance.widgets.view.ptr.load.PtrListView;
+import com.hezaijin.advance.widgets.view.ptr.load.PtrListeners;
+import com.hezaijin.advance.widgets.view.ptr.manager.IPtrBaseFooter;
+import com.hezaijin.advance.widgets.view.ptr.manager.PtrManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PtrListViewActivity extends AppCompatActivity {
-    PtrListView listView;
+    ListView listView;
     private static final String TAG = "PtrListView";
 
     private List<Integer> list = new ArrayList<Integer>();
@@ -43,17 +49,29 @@ public class PtrListViewActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        listView = (PtrListView) findViewById(R.id.ptrlistview);
 
-        listView.setOnLoadMoreListener(new PtrListView.OnLoadMoreListener() {
+        final TextView tv = new TextView(PtrListViewActivity.this);
+        //这里的footer的layout可以是new，也可以是xml
+        tv.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.WRAP_CONTENT));
+        tv.setGravity(Gravity.CENTER);
+        tv.setTextSize(30);
+        tv.setPadding(0, 20, 0, 20);
+        ImageView iv = new ImageView(this);
+        iv.setImageResource(R.drawable.__leak_canary_icon);
+        listView = (ListView) findViewById(R.id.ptrlistview);
+
+        // 如果想多footerview的话，item click需要自己处理position
+        listView.addFooterView(iv);
+
+        PtrManager.bind(listView).setOnLoadMoreListener(new PtrListeners.OnLoadMoreListener() {
             @Override
-            public void onLoadMoreStart() {
-                Log.d(TAG, "onLoadMoreStart() called with: " + " is in mainThread ? ="  + (Looper.myLooper() == Looper.getMainLooper()));
+            public void onLoadMorePrepared() {
+                Log.d(TAG, "onLoadMorePrepared() called with: " + " is in mainThread ? =" + (Looper.myLooper() == Looper.getMainLooper()));
             }
 
             @Override
-            public void onLoadMoreRunning() {
-                Log.d(TAG, "onLoadMoreRunning() called with: " + " is in mainThread ? ="  + (Looper.myLooper() == Looper.getMainLooper()));
+            public void onLoadMoreBackground() {
+                Log.d(TAG, "onLoadMoreBackground() called with: " + " is in mainThread ? =" + (Looper.myLooper() == Looper.getMainLooper()));
                 try {
                     Thread.sleep(5000);
                     int size = i + 10;
@@ -70,19 +88,42 @@ public class PtrListViewActivity extends AppCompatActivity {
                 Log.d(TAG, "onLoadMoreCompleted() called with: " + " is in mainThread ? =" + (Looper.myLooper() == Looper.getMainLooper()));
                 adapter.notifyDataSetChanged();
             }
-        }).setOnPtrItemClickListener(new PtrListView.OnItemClickListener() {
+        }).setFooterView(new IPtrBaseFooter() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TAG, "onItemClick() called with: " + "position = " + position);
+            public View onGetContentView() {
+                return tv;
+            }
+            @Override
+            public void onLoadMorePrepare() {
+                tv.setText("onLoadMorePrepare");
+                Log.d(TAG, "tv.setText( onLoadMorePrepare)" );
+            }
+
+            @Override
+            public void onLoadMoreBackground() {
+                tv.setText("onLoadMoreBackground");
+                Log.d(TAG, "tv.setText( onLoadMoreBackground)");
 
             }
-        }).setOnFootClickListener(new PtrListView.OnFootClickListener() {
+
+            @Override
+            public void onLoadMoreCompleted() {
+                tv.setText("onLoadMoreCompleted");
+                Log.d(TAG, "tv.setText( onLoadMoreCompleted)");
+            }
+        }).setOnFootClickListener(new PtrListeners.OnFootClickListener() {
             @Override
             public void onFootClickListener(View foot) {
-                Log.d(TAG, "onFootClickListener() called with: " + "");
+                Log.d(TAG, "onFootClickListener");
 
             }
+        }).setOnPtrItemClickListener(new PtrListeners.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d(TAG, "onItemClick position ="+position);
+            }
         });
+
 
         for (; i < 10; i++) {
             list.add(i);
@@ -120,7 +161,9 @@ public class PtrListViewActivity extends AppCompatActivity {
                 convertView = View.inflate(PtrListViewActivity.this, R.layout.item_ptrlistview_demo, null);
             }
             TextView tv = ViewHolder.get(convertView, R.id.test);
-            tv.setText(String.valueOf(list.get(position)));
+            if (null!=tv){
+                tv.setText(String.valueOf(list.get(position)));
+            }
             return convertView;
         }
     }

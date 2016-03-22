@@ -70,7 +70,7 @@ public class ListDataFragment extends BaseFragment {
         mListView.addHeaderView(header);
         View foot = inflater.inflate(R.layout.foot_list_data, null, false);
         PtrFootView footView = (PtrFootView) foot.findViewById(R.id.foot);
-        footView.startRefresh();
+        footView.onLoadMoreBackground();
         mListView.addFooterView(foot);
         return view;
     }

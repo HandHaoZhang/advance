@@ -12,8 +12,8 @@
     tools:context=".ui.activity.PtrListViewActivity"
     tools:showIn="@layout/activity_ptr_list_view">
 
-    <com.hezaijin.advance.widgets.view.ptr.load.PtrListView
+    <ListView
         android:id="@+id/ptrlistview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.hezaijin.advance.widgets.view.ptr.load.PtrListView>
+        android:layout_height="match_parent"></ListView>
 </RelativeLayout>

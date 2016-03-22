@@ -170,7 +170,7 @@ public class PtrListView extends ListView implements AbsListView.OnScrollListene
     private void readyLoadMore() {
         mStatus = STATUS_RUNNING;
         this.addFooterView(footer);
-        ((PtrFootView) footer).startRefresh();
+        ((PtrFootView) footer).onLoadMorePrepare();
     }
 
     private void startLoadMore() {

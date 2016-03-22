@@ -4,18 +4,20 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
+import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.hezaijin.advance.widgets.view.ptr.drawable.MaterialProgressDrawable;
+import com.hezaijin.advance.widgets.view.ptr.manager.IPtrBaseFooter;
 
 /**
  * 底部加载更多的foot view
  * @author HaoZhang
  * @date 2016/2/1.
  */
-public class PtrFootView extends LinearLayout{
+public class PtrFootView extends LinearLayout implements IPtrBaseFooter{
 
     private static final int DEFAULT_PROGRESS_COLOR = 0Xff4caf50;
     private static final int DEFAULT_WIDTH = 100;
@@ -70,16 +72,33 @@ public class PtrFootView extends LinearLayout{
         // TODO set paint stroke width
     }
 
-    public void startRefresh(){
-        mRefreshDrawable.start();
-    }
+
 
     public void stopRefresh(Animation animation,MaterialProgressDrawable.AnimationListener listener){
         mRefreshDrawable.stop(animation,listener);
     }
 
     public void stopRefresh(){
-        mRefreshDrawable.stop();
     }
 
+    @Override
+    public View onGetContentView() {
+        return this;
+    }
+
+    @Override
+    public void onLoadMorePrepare() {
+
+    }
+
+    @Override
+    public void onLoadMoreBackground() {
+        mRefreshDrawable.start();
+
+    }
+
+    @Override
+    public void onLoadMoreCompleted() {
+        mRefreshDrawable.stop();
+    }
 }

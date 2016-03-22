@@ -20,7 +20,6 @@ import java.util.ArrayList;
 /**
  * Created by Syehunter on 2015/11/2.
  */
-@Deprecated
 public class RefreshRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int TYPE_HEADER_VIEW = Integer.MIN_VALUE;
@@ -176,7 +175,7 @@ public class RefreshRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        /*if (null != mAdapter) {
+        if (null != mAdapter) {
             if (mHeaderViewTypes.contains(viewType)) {
                 //currentPosition in mHeaderViews is (viewType - TYPE_HEADER_VIEW)
                 return new RecyclerHeaderViewHolder(mHeaderViews.get(viewType - TYPE_HEADER_VIEW));
@@ -187,7 +186,7 @@ public class RefreshRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
             } else {
                 return mAdapter.onCreateViewHolder(parent, viewType);
             }
-        }*/
+        }
         return null;
     }
 
@@ -365,6 +364,14 @@ public class RefreshRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVie
 
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener){
         this.mOnItemLongClickListener = onItemLongClickListener;
+    }
+
+
+    public class RecyclerHeaderViewHolder extends RecyclerView.ViewHolder {
+
+        public RecyclerHeaderViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 
 }

@@ -32,7 +32,7 @@ public class RefreshActivity extends BaseActivity {
         findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                view.startRefresh();
+//                view.startRefresh();
             }
         });
 
